@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="col-md-5">
+    <app-recipe-list (detail)="passDetail($event)"></app-recipe-list>
+  </div>
+  <div class="col-md-5">
+    <app-recipe-detail
+      *ngIf="viewRecipeDetail; else infoText"
+      [recipeDetail]="viewRecipeDetail"
+    ></app-recipe-detail
+    ><ng-template #infoText><p>Bitte wähle ein Rezept aus</p></ng-template>
+  </div>
+</div>
