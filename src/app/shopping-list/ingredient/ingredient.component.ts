@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { ingredient } from 'src/app/shared/ingredient.model';
 
 @Component({
   selector: 'app-ingredient',

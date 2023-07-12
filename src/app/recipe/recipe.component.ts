@@ -13,6 +13,12 @@ export class RecipeComponent {
 
   constructor(private recipeService: RecipeService) {}
 
+  ngOnInit() {
+    this.recipeService.recipeSelected.subscribe(
+      (recipe: Recipe) => (this.viewRecipeDetail = recipe)
+    );
+  }
+
   passDetail(recipeNr: Recipe) {
     this.viewRecipeDetail = recipeNr;
   }
