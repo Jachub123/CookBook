@@ -1,12 +1,8 @@
-<app-header
-  (recipeClicked)="renderView($event)"
-  (listClicked)="renderView($event)"
-></app-header>
+<app-header></app-header>
 <div class="container">
   <div class="row">
     <div class="col-mid-12">
-      <app-recipe *ngIf="view === 'recipe'"></app-recipe>
-      <app-shopping-list *ngIf="view === 'shoppingList'"></app-shopping-list>
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>

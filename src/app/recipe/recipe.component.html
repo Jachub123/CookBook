@@ -2,11 +2,7 @@
   <div class="col-md-5">
     <app-recipe-list></app-recipe-list>
   </div>
-  <div class="col-md-5">
-    <app-recipe-detail
-      *ngIf="viewRecipeDetail; else infoText"
-      [recipeDetail]="viewRecipeDetail"
-    ></app-recipe-detail
-    ><ng-template #infoText><p>Bitte wähle ein Rezept aus</p></ng-template>
+  <div class="col-md-7">
+    <router-outlet></router-outlet>
   </div>
 </div>
