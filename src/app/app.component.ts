@@ -7,9 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'cookBook';
-  view = 'recipe';
-
-  renderView(view) {
-    this.view = view;
-  }
 }
