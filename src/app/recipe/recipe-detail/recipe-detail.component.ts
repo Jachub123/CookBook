@@ -25,6 +25,11 @@ export class RecipeDetailComponent {
     this.slService.addIngredientList(ingredients);
   }
 
+  onDelete() {
+    this.recipeService.deleteRecipe(this.id);
+    this.router.navigate(['/recipes']);
+  }
+
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       this.id = +params['id'];
