@@ -8,7 +8,7 @@ import { Subject } from 'rxjs';
 export class RecipeService {
   recipesChanged = new Subject<Recipe[]>();
 
-  private recipes: Recipe[] = [
+  /*   private recipes: Recipe[] = [
     new Recipe(
       'Chicken Tikka Masala',
       'spicy, meat, indian',
@@ -32,7 +32,14 @@ export class RecipeService {
         new Ingredient('minced Beef', 500),
       ]
     ),
-  ];
+  ]; */
+
+  private recipes: Recipe[] = [];
+
+  setRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
+    this.recipesChanged.next(this.recipes.slice());
+  }
 
   getRecipes() {
     return this.recipes.slice();

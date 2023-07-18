@@ -1,6 +1,12 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  FormControl,
+  FormArray,
+  Validators,
+  Form,
+} from '@angular/forms';
 import { RecipeService } from '../recipe.service';
 import { Recipe } from './../recipe.model';
 
@@ -57,6 +63,10 @@ export class RecipeEditComponent {
 
   onCancel() {
     this.router.navigate(['../'], { relativeTo: this.route });
+  }
+
+  onDeleteIngredient(index: number) {
+    (<FormArray>this.recipeForm.get('ingredients')).removeAt(index);
   }
 
   get controls() {

@@ -18,6 +18,8 @@ import { RecipeStartComponent } from './recipe/recipe-start/recipe-start.compone
 import { NotfoundComponent } from './notfound/notfound.component';
 import { RecipeEditComponent } from './recipe/recipe-edit/recipe-edit.component';
 import { RecipeService } from './recipe/recipe.service';
+import { HttpClientModule } from '@angular/common/http';
+import { LimitLengthPipe } from './limit-length.pipe';
 
 @NgModule({
   declarations: [
@@ -34,8 +36,15 @@ import { RecipeService } from './recipe/recipe.service';
     RecipeStartComponent,
     NotfoundComponent,
     RecipeEditComponent,
+    LimitLengthPipe,
   ],
-  imports: [BrowserModule, FormsModule, AppRoutingModule, ReactiveFormsModule],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+  ],
   providers: [RecipeService],
   bootstrap: [AppComponent],
 })

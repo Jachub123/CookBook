@@ -6,12 +6,12 @@ import { RecipeService } from './recipe.service';
   selector: 'app-recipe',
   templateUrl: './recipe.component.html',
   styleUrls: ['./recipe.component.scss'],
-  providers: [RecipeService],
+  providers: [],
 })
 export class RecipeComponent {
   viewRecipeDetail: Recipe;
 
-  constructor(private recipeService: RecipeService) {}
+  constructor() {}
 
   ngOnInit() {}
 }
