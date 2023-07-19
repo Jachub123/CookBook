@@ -4,6 +4,7 @@ import { Ingredient } from '../../shared/ingredient.model';
 import { ShoppingListService } from '../../shopping-list/shopping-list.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { RecipeService } from '../recipe.service';
+import { DataStorageService } from 'src/app/shared/data-storage.service';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -18,7 +19,8 @@ export class RecipeDetailComponent {
     private slService: ShoppingListService,
     private route: ActivatedRoute,
     private router: Router,
-    private recipeService: RecipeService
+    private recipeService: RecipeService,
+    private dsService: DataStorageService
   ) {}
 
   onAddToShoppingList(ingredients: Ingredient[]) {
@@ -28,6 +30,7 @@ export class RecipeDetailComponent {
   onDelete() {
     this.recipeService.deleteRecipe(this.id);
     this.router.navigate(['/recipes']);
+    this.dsService.storeRecipes();
   }
 
   ngOnInit() {

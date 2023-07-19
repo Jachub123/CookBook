@@ -9,9 +9,19 @@
             [disabled]="!recipeForm.valid"
           >
             Save</button
-          ><button type="button" class="btn btn-danger" (click)="onCancel()">
+          ><button
+            type="button"
+            class="btn btn-danger"
+            (click)="unAffirmedCancel()"
+          >
             Cancel
           </button>
+          <span *ngIf="!sure"
+            >Bist du sicher dass du deine Änderungen verwerfen möchtest?
+            <button type="button" class="btn btn-danger" (click)="onCancel()">
+              ja
+            </button>
+          </span>
         </div>
       </div>
       <div class="row">

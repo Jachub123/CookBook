@@ -9,6 +9,7 @@ import {
 } from '@angular/forms';
 import { RecipeService } from '../recipe.service';
 import { Recipe } from './../recipe.model';
+import { DataStorageService } from 'src/app/shared/data-storage.service';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -19,11 +20,13 @@ export class RecipeEditComponent {
   id: number;
   editMode: boolean = false;
   recipeForm: FormGroup;
+  sure: boolean = true;
 
   constructor(
     private route: ActivatedRoute,
     private recipeService: RecipeService,
-    private router: Router
+    private router: Router,
+    private dsService: DataStorageService
   ) {}
 
   ngOnInit() {
@@ -46,7 +49,12 @@ export class RecipeEditComponent {
     } else {
       this.recipeService.addRecipe(this.recipeForm.value);
     }
+    this.onSave();
     this.onCancel();
+  }
+
+  onSave() {
+    this.dsService.storeRecipes();
   }
 
   onAddIngredient() {
@@ -59,6 +67,14 @@ export class RecipeEditComponent {
         ]),
       })
     );
+  }
+
+  unAffirmedCancel() {
+    if (this.recipeForm.dirty) {
+      this.sure = false;
+    } else {
+      this.onCancel();
+    }
   }
 
   onCancel() {
