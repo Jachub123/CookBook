@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Recipe } from './recipe.model';
 import { Subject } from 'rxjs';
+import { Router } from '@angular/router';
+import { FormGroup, NgModel } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 @Injectable({
   providedIn: 'root',
 })
 export class RecipeService {
   recipesChanged = new Subject<Recipe[]>();
+  recipeForm: FormGroup;
 
   /*   private recipes: Recipe[] = [
     new Recipe(
@@ -33,6 +37,8 @@ export class RecipeService {
     ),
   ]; */
 
+  constructor(private router: Router, private route: ActivatedRoute) {}
+
   private recipes: Recipe[] = [];
 
   setRecipes(recipes: Recipe[]) {
@@ -46,6 +52,10 @@ export class RecipeService {
 
   getRecipe(index: number) {
     return this.recipes[index];
+  }
+
+  onCancel() {
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 
   addRecipe(recipe: Recipe) {

@@ -20,6 +20,7 @@ import { RecipeEditComponent } from './recipe/recipe-edit/recipe-edit.component'
 import { RecipeService } from './recipe/recipe.service';
 import { HttpClientModule } from '@angular/common/http';
 import { LimitLengthPipe } from './limit-length.pipe';
+import { AreYouSureComponent } from './are-you-sure/are-you-sure.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { LimitLengthPipe } from './limit-length.pipe';
     NotfoundComponent,
     RecipeEditComponent,
     LimitLengthPipe,
+    AreYouSureComponent,
   ],
   imports: [
     BrowserModule,

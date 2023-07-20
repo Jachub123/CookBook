@@ -12,12 +12,12 @@
           ><button
             type="button"
             class="btn btn-danger"
-            (click)="unAffirmedCancel()"
+            (click)="onUnAffirmedCancel()"
           >
             Cancel
           </button>
-          <span *ngIf="!sure"
-            >Bist du sicher dass du deine Änderungen verwerfen möchtest?
+          <span *ngIf="sure"
+            ><app-are-you-sure [cancel]="true"></app-are-you-sure>
             <button type="button" class="btn btn-danger" (click)="onCancel()">
               ja
             </button>

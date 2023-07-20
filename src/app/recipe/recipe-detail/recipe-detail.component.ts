@@ -14,6 +14,7 @@ import { DataStorageService } from 'src/app/shared/data-storage.service';
 export class RecipeDetailComponent {
   recipeDetail: Recipe;
   id: number;
+  sure: boolean;
 
   constructor(
     private slService: ShoppingListService,
@@ -25,6 +26,10 @@ export class RecipeDetailComponent {
 
   onAddToShoppingList(ingredients: Ingredient[]) {
     this.slService.addIngredientList(ingredients);
+  }
+
+  unaffirmedDelete() {
+    this.sure = true;
   }
 
   onDelete() {

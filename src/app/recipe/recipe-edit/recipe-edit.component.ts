@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import {
   FormGroup,
   FormControl,
@@ -10,6 +10,7 @@ import {
 import { RecipeService } from '../recipe.service';
 import { Recipe } from './../recipe.model';
 import { DataStorageService } from 'src/app/shared/data-storage.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -20,12 +21,12 @@ export class RecipeEditComponent {
   id: number;
   editMode: boolean = false;
   recipeForm: FormGroup;
-  sure: boolean = true;
+  sure: boolean;
 
   constructor(
     private route: ActivatedRoute,
     private recipeService: RecipeService,
-    private router: Router,
+
     private dsService: DataStorageService
   ) {}
 
@@ -35,6 +36,18 @@ export class RecipeEditComponent {
       this.editMode = params['id'] != null;
       this.initForm();
     });
+  }
+
+  onUnAffirmedCancel() {
+    if (this.recipeForm.dirty) {
+      this.sure = true;
+    } else {
+      this.onCancel();
+    }
+  }
+
+  onCancel() {
+    this.recipeService.onCancel();
   }
 
   onSubmit() {
@@ -50,7 +63,7 @@ export class RecipeEditComponent {
       this.recipeService.addRecipe(this.recipeForm.value);
     }
     this.onSave();
-    this.onCancel();
+    this.recipeService.onCancel();
   }
 
   onSave() {
@@ -67,18 +80,6 @@ export class RecipeEditComponent {
         ]),
       })
     );
-  }
-
-  unAffirmedCancel() {
-    if (this.recipeForm.dirty) {
-      this.sure = false;
-    } else {
-      this.onCancel();
-    }
-  }
-
-  onCancel() {
-    this.router.navigate(['../'], { relativeTo: this.route });
   }
 
   onDeleteIngredient(index: number) {
