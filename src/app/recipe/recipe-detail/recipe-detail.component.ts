@@ -14,7 +14,7 @@ import { DataStorageService } from 'src/app/shared/data-storage.service';
 export class RecipeDetailComponent {
   recipeDetail: Recipe;
   id: number;
-  sure: boolean;
+  sure: boolean = false;
 
   constructor(
     private slService: ShoppingListService,
