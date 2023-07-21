@@ -1,49 +1,45 @@
 <div class="row manageRecButton">
-  <div class="col-xs-12">
-    <div appDropwdown class="btn-group">
+  <div class="col-8 p-0">
+    <h1 id="recipeDetail.name">{{ recipeDetail.name }}</h1>
+  </div>
+
+  <div class="col-12 col-lg-4 p-0">
+    <div appDropwdown class="btn-group float-lg-right">
       <button type="button" class="btn btn-primary dropdown-toggle">
-        Manage Recipe<span class="caret"></span>
+        Rezept verwalten<span class="caret"></span>
       </button>
-      <ul class="dropdown-menu">
-        <li>
-          <a (click)="onAddToShoppingList(recipeDetail.ingredients)"
-            >To Shopping List</a
-          >
-        </li>
-
-        <li><a routerLink="edit">Edit Recipe</a></li>
-
-        <li><a (click)="unaffirmedDelete()">Delete Recipe</a></li>
-      </ul>
+      <div class="dropdown-menu">
+        <a
+          class="dropdown-item"
+          (click)="onAddToShoppingList(recipeDetail.ingredients)"
+          >zur Einkaufsliste hinzufügen</a
+        >
+        <a class="dropdown-item" routerLink="edit">Rezept bearbeiten</a>
+        <a class="dropdown-item" (click)="unaffirmedDelete()">Rezept Löschen</a>
+      </div>
     </div>
   </div>
 </div>
-<span *ngIf="sure"
-  ><app-are-you-sure [del]="true"></app-are-you-sure
-  ><button type="button" class="btn btn-danger" (click)="onDelete()">
-    ja
-  </button></span
->
+<div class="warn" *ngIf="!sure">
+  <app-are-you-sure [del]="true"></app-are-you-sure
+  ><button type="button" class="btn btn-danger" (click)="onDelete()">ja</button>
+</div>
 <div class="row">
   <div class="col-xs-12">
     <img
       src="{{ recipeDetail.imagePath }}"
       alt="{{ recipeDetail.name }}"
-      class="img-responsive"
+      class="img-fluid"
     />
   </div>
 </div>
-<div class="row">
-  <div class="col-xs-12">
-    <h1>{{ recipeDetail.name }}</h1>
-  </div>
-</div>
-<div class="row">
+
+<div class="row mb-3">
   <div class="col-xs-12 description">{{ recipeDetail.description }}</div>
 </div>
 <div class="row">
-  <div class="col-xs-12">
-    <h2>Ingredients:</h2>
+  <div class="col-12 p-0">
+    <h2>Zutaten:</h2>
     <ul class="list-group">
       <li
         class="list-group-item"

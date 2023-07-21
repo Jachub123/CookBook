@@ -1,3 +1,19 @@
-.textNextToImg {
-  width: 80%;
+.list-group-item {
+  .list-group-item-text {
+    width: 75%;
+  }
+  img {
+    position: absolute;
+    right: 15px;
+    top: 0.75rem;
+    max-height: 75%;
+    max-width: 20%;
+  }
+  h5 {
+    max-width: 80%;
+  }
+}
+
+span {
+  width: 20%;
 }

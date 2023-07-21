@@ -1,28 +1,21 @@
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand">Recipe Book</a>
-    </div>
-    <div class="navbar-default">
-      <ul class="nav navbar-nav">
-        <li routerLinkActive="active">
-          <a routerLink="/recipes">Recipes</a>
-        </li>
-        <li routerLinkActive="active">
-          <a routerLink="/shopping-list">Shopping List</a>
-        </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li appDropwdown class="dropdown">
-          <a class="dropdown-toggle">Manage <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li>
-              <a (click)="onSave()">Save Data</a>
-            </li>
-            <li><a (click)="onFetchData()">Fetch Data</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-  </div>
+<nav class="navbar navbar-light navbar-expand-md d-block d-md-flex bg-light">
+  <a routerLink="/" class="navbar-brand">Rezeptbuch</a>
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item" routerLinkActive="active">
+      <a class="nav-link" routerLink="/recipes">Rezepte</a>
+    </li>
+    <li class="nav-item" routerLinkActive="active">
+      <a class="nav-link" routerLink="/shopping-list">Einkaufsliste</a>
+    </li>
+
+    <li class="nav-item dropdown" appDropwdown>
+      <a class="nav-link dropdown-toggle"
+        >bearbeiten <span class="caret"></span
+      ></a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" (click)="onSave()">Daten Speichern</a>
+        <a class="dropdown-item" (click)="onFetchData()">Daten abrufen</a>
+      </div>
+    </li>
+  </ul>
 </nav>

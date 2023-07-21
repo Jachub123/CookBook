@@ -1,17 +1,18 @@
-<div class="row">
-  <div class="col-xs-12">
+<div class="row mb-3">
+  <div class="col-12 p-0">
     <button routerLink="/recipes/new" class="btn btn-success">
       New Recipe
     </button>
   </div>
 </div>
-<hr />
+
 <div class="row">
-  <div class="col-xs-12">
+  <div class="col-12 p-0">
     <app-recipe-item
       *ngFor="let recipeEl of recipes; let i = index"
       [recipe]="recipeEl"
       [recipeNr]="i"
+      class="list-group"
     ></app-recipe-item>
   </div>
 </div>

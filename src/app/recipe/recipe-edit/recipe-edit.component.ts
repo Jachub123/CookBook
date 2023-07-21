@@ -21,7 +21,7 @@ export class RecipeEditComponent {
   id: number;
   editMode: boolean = false;
   recipeForm: FormGroup;
-  sure: boolean;
+  sure: boolean = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -36,11 +36,14 @@ export class RecipeEditComponent {
       this.editMode = params['id'] != null;
       this.initForm();
     });
+    this.recipeService.sure.subscribe((sure: boolean) => {
+      this.sure = sure;
+    });
   }
 
   onUnAffirmedCancel() {
     if (this.recipeForm.dirty) {
-      this.sure = true;
+      this.recipeService.sure.next(false);
     } else {
       this.onCancel();
     }

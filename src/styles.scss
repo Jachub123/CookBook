@@ -2,3 +2,19 @@
 a {
   cursor: pointer;
 }
+
+.row {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.open {
+  .dropdown-menu {
+    position: absolute;
+    display: block;
+  }
+}
+
+button {
+  margin-right: 5px;
+}

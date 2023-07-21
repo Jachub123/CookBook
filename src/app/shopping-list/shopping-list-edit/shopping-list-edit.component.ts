@@ -3,6 +3,7 @@ import { ShoppingListService } from './../shopping-list.service';
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { RecipeService } from 'src/app/recipe/recipe.service';
 
 @Component({
   selector: 'app-shopping-list-edit',
@@ -15,8 +16,12 @@ export class ShoppingListEditComponent implements OnInit, OnDestroy {
   editMode = false;
   editedItemIndex: number;
   editedItem: Ingredient;
+  sure: boolean = true;
 
-  constructor(private slService: ShoppingListService) {}
+  constructor(
+    private slService: ShoppingListService,
+    private recipeService: RecipeService
+  ) {}
 
   addIngredient(form: NgForm) {
     const value = form.value;
@@ -43,6 +48,13 @@ export class ShoppingListEditComponent implements OnInit, OnDestroy {
         });
       }
     );
+    this.recipeService.sure.subscribe((sure: boolean) => {
+      this.sure = sure;
+    });
+  }
+
+  unaffirmedDelete() {
+    this.recipeService.sure.next(false);
   }
 
   onClear() {
@@ -52,6 +64,7 @@ export class ShoppingListEditComponent implements OnInit, OnDestroy {
   onDelete() {
     this.slService.deleteIngredient(this.editedItemIndex);
     this.onClear();
+    this.sure = true;
   }
 
   ngOnDestroy() {

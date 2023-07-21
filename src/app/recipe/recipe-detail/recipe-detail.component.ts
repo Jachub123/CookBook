@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Recipe } from '../recipe.model';
 import { Ingredient } from '../../shared/ingredient.model';
 import { ShoppingListService } from '../../shopping-list/shopping-list.service';
@@ -11,10 +11,10 @@ import { DataStorageService } from 'src/app/shared/data-storage.service';
   templateUrl: './recipe-detail.component.html',
   styleUrls: ['./recipe-detail.component.scss'],
 })
-export class RecipeDetailComponent {
+export class RecipeDetailComponent implements OnInit {
   recipeDetail: Recipe;
   id: number;
-  sure: boolean = false;
+  sure: boolean = true;
 
   constructor(
     private slService: ShoppingListService,
@@ -29,7 +29,7 @@ export class RecipeDetailComponent {
   }
 
   unaffirmedDelete() {
-    this.sure = true;
+    this.recipeService.sure.next(false);
   }
 
   onDelete() {
@@ -46,6 +46,9 @@ export class RecipeDetailComponent {
       } else {
         this.router.navigate(['not-found'], { relativeTo: this.route });
       }
+    });
+    this.recipeService.sure.subscribe((sure: boolean) => {
+      this.sure = sure;
     });
   }
 }
