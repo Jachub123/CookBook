@@ -38,7 +38,7 @@
           ><button
             class="btn btn-danger"
             type="button"
-            (click)="unaffirmedDelete()"
+            appAffirmationWarning
             *ngIf="editMode"
           >
             Löschen</button
@@ -47,10 +47,11 @@
           </button></ng-template
         >
         <div *ngIf="!sure; else control">
-          <app-are-you-sure [ingredient]="true"></app-are-you-sure
-          ><button type="button" class="btn btn-danger" (click)="onDelete()">
-            ja
-          </button>
+          <app-are-you-sure
+            [itemIndex]="editedItemIndex"
+            [ingredient]="true"
+            [slForm]="f"
+          ></app-are-you-sure>
         </div>
       </div>
     </div>

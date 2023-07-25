@@ -1,7 +1,6 @@
 import { Ingredient } from './../shared/ingredient.model';
 import { Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { NgForm } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +8,8 @@ import { NgForm } from '@angular/forms';
 export class ShoppingListService {
   ingredientsChanged = new Subject<Ingredient[]>();
   startedEditing = new Subject<number>();
+  editMode = new Subject<boolean>();
+
   private ingredients: Ingredient[] = [
     new Ingredient('Onions', 5),
     new Ingredient('Tomato', 7),

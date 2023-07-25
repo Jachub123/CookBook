@@ -41,18 +41,6 @@ export class RecipeEditComponent {
     });
   }
 
-  onUnAffirmedCancel() {
-    if (this.recipeForm.dirty) {
-      this.recipeService.sure.next(false);
-    } else {
-      this.onCancel();
-    }
-  }
-
-  onCancel() {
-    this.recipeService.onCancel();
-  }
-
   onSubmit() {
     const newRecipe = new Recipe(
       this.recipeForm.value['name'],

@@ -1,4 +1,3 @@
-import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -21,6 +20,7 @@ import { RecipeService } from './recipe/recipe.service';
 import { HttpClientModule } from '@angular/common/http';
 import { LimitLengthPipe } from './limit-length.pipe';
 import { AreYouSureComponent } from './are-you-sure/are-you-sure.component';
+import { AffirmationWarningDirective } from './shared/affirmation-warning.directive';
 
 @NgModule({
   declarations: [
@@ -39,6 +39,7 @@ import { AreYouSureComponent } from './are-you-sure/are-you-sure.component';
     RecipeEditComponent,
     LimitLengthPipe,
     AreYouSureComponent,
+    AffirmationWarningDirective,
   ],
   imports: [
     BrowserModule,

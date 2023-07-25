@@ -48,6 +48,10 @@ export class ShoppingListEditComponent implements OnInit, OnDestroy {
         });
       }
     );
+    this.slService.editMode.subscribe((editMode) => {
+      this.editMode = editMode;
+    });
+    this.editMode;
     this.recipeService.sure.subscribe((sure: boolean) => {
       this.sure = sure;
     });
@@ -60,11 +64,6 @@ export class ShoppingListEditComponent implements OnInit, OnDestroy {
   onClear() {
     this.slForm.reset();
     this.editMode = false;
-  }
-  onDelete() {
-    this.slService.deleteIngredient(this.editedItemIndex);
-    this.onClear();
-    this.sure = true;
   }
 
   ngOnDestroy() {

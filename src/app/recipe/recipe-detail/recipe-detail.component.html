@@ -15,14 +15,13 @@
           >zur Einkaufsliste hinzufügen</a
         >
         <a class="dropdown-item" routerLink="edit">Rezept bearbeiten</a>
-        <a class="dropdown-item" (click)="unaffirmedDelete()">Rezept Löschen</a>
+        <a class="dropdown-item" appAffirmationWarning>Rezept Löschen</a>
       </div>
     </div>
   </div>
 </div>
 <div class="warn" *ngIf="!sure">
-  <app-are-you-sure [del]="true"></app-are-you-sure
-  ><button type="button" class="btn btn-danger" (click)="onDelete()">ja</button>
+  <app-are-you-sure [del]="true"></app-are-you-sure>
 </div>
 <div class="row">
   <div class="col-xs-12">

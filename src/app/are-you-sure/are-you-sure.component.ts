@@ -1,5 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { RecipeService } from '../recipe/recipe.service';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { DataStorageService } from '../shared/data-storage.service';
+import { Recipe } from '../recipe/recipe.model';
+import { ShoppingListService } from '../shopping-list/shopping-list.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-are-you-sure',
@@ -10,11 +15,30 @@ export class AreYouSureComponent implements OnInit {
   @Input('del') del: boolean = false;
   @Input('cancel') cancel: boolean = false;
   @Input('ingredient') ingredient: boolean = false;
-
+  @Input() itemIndex: number;
+  @Input() slForm: NgForm;
+  recipeDetail: Recipe;
   message: string;
-  constructor(private recipeService: RecipeService) {}
+  id: number;
+
+  constructor(
+    private router: Router,
+    private recipeService: RecipeService,
+    private dsService: DataStorageService,
+    private route: ActivatedRoute,
+    private slService: ShoppingListService
+  ) {}
+
   ngOnInit() {
     this.confirmation();
+    this.route.params.subscribe((params: Params) => {
+      this.id = +params['id'];
+      if (this.recipeService.getRecipe(this.id) !== undefined) {
+        this.recipeDetail = this.recipeService.getRecipe(this.id);
+      } else {
+        this.router.navigate(['not-found'], { relativeTo: this.route });
+      }
+    });
   }
 
   confirmation() {
@@ -33,7 +57,30 @@ export class AreYouSureComponent implements OnInit {
     }
   }
 
-  unsure() {
+  affirm() {
+    if (this.cancel) {
+      this.recipeService.onCancel();
+    } else if (this.del) {
+      this.onDeleteRecipe();
+    } else {
+      this.onDeleteIngredient();
+    }
+  }
+
+  onDeleteIngredient() {
+    this.slService.deleteIngredient(this.itemIndex);
+    this.slForm.reset();
+    this.recipeService.sure.next(true);
+    this.slService.editMode.next(false);
+  }
+
+  onDeleteRecipe() {
+    this.recipeService.deleteRecipe(this.id);
+    this.router.navigate(['/recipes']);
+    this.dsService.storeRecipes();
+  }
+
+  sure() {
     this.recipeService.sure.next(true);
   }
 }

@@ -4,7 +4,6 @@ import { Ingredient } from '../../shared/ingredient.model';
 import { ShoppingListService } from '../../shopping-list/shopping-list.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { RecipeService } from '../recipe.service';
-import { DataStorageService } from 'src/app/shared/data-storage.service';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -20,22 +19,11 @@ export class RecipeDetailComponent implements OnInit {
     private slService: ShoppingListService,
     private route: ActivatedRoute,
     private router: Router,
-    private recipeService: RecipeService,
-    private dsService: DataStorageService
+    private recipeService: RecipeService
   ) {}
 
   onAddToShoppingList(ingredients: Ingredient[]) {
     this.slService.addIngredientList(ingredients);
-  }
-
-  unaffirmedDelete() {
-    this.recipeService.sure.next(false);
-  }
-
-  onDelete() {
-    this.recipeService.deleteRecipe(this.id);
-    this.router.navigate(['/recipes']);
-    this.dsService.storeRecipes();
   }
 
   ngOnInit() {
